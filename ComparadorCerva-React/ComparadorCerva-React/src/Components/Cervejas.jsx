@@ -5,8 +5,18 @@ const Cervejas = ({ nome, imagem, num, ml }) => {
 
   const [count, setCount] = useState(0)
   const [valor, setValor] = useState('')
-  const [calculo, setCalculo] = useState('')
+  const [calculo, setCalculo] = useState(0)
+  const [liquido, setLiquido] = useState(0)
 
+  useEffect(() => {
+    const calculando = Number(valor) * count
+    setCalculo(calculando)
+  }, [count, valor])
+
+  useEffect(() => {
+    const liquido = count * ml
+    setLiquido(liquido)
+  }, [count])
 
   const buttonPlus = () => {
     setCount(count > 0 ? count - 1 : 0)
@@ -16,18 +26,9 @@ const Cervejas = ({ nome, imagem, num, ml }) => {
     setCount(count + 1)
   }
 
-  const handleValor = (e, ...valor) => {
-
-    valor = (e.target.value)
-    
-    let calculo = valor * count
-
+  const handleValor = (e) => {
+    const valor = e.target.value
     setValor(valor)
-
-    setCalculo(calculo)
-
-    console.log(valor)
-    console.log(calculo)
   }
 
   return (
@@ -49,8 +50,9 @@ const Cervejas = ({ nome, imagem, num, ml }) => {
         />
         <span>{ml}ml</span>
       </div>
-      <div>
-        <span>{calculo}</span>
+      <div className={style.tela}>
+        {calculo !== 0 && <span>{`R$${calculo.toFixed(2).replace('.', ',')}`}</span>}
+        {liquido !== 0 && <span>{`${liquido.toFixed(2).replace('.', ',')}ml`}</span>}
       </div>
     </div>
   )

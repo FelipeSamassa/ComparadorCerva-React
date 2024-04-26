@@ -51,3 +51,13 @@ input::-webkit-inner-spin-button{
     font-size: 1.1rem;
     margin: 0 .5rem;
 }
+
+.tela{
+    width: 100%;
+    border-top: 1px dashed darkgoldenrod;
+    padding-top: .5rem;
+}
+
+.tela span:first-child{
+    padding-right: .5rem;
+}
