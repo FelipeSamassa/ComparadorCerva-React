@@ -5,28 +5,39 @@ const Cervejas = ({ nome, imagem, num, ml }) => {
 
   const [count, setCount] = useState(0)
   const [valor, setValor] = useState('')
+  const [calculo, setCalculo] = useState('')
 
-  const handleValor = (e) => {
-    e.preventDefault()
 
-    const updateValor = (e.target.value)
-
-    setValor(updateValor)
+  const buttonPlus = () => {
+    setCount(count > 0 ? count - 1 : 0)
   }
 
-  if(valor > 0) {
-
+  const buttonMin = () => {
+    setCount(count + 1)
   }
 
+  const handleValor = (e, ...valor) => {
+
+    valor = (e.target.value)
+    
+    let calculo = valor * count
+
+    setValor(valor)
+
+    setCalculo(calculo)
+
+    console.log(valor)
+    console.log(calculo)
+  }
 
   return (
     <div className={style.containerUn}>
       <h3>{nome}</h3>
       <img src={imagem} alt="" />
       <div>
-        <button onClick={() => setCount(count > 0 ? count - 1 : 0)}>-</button>
+        <button onClick={buttonPlus}>-</button>
         <p>{count}</p>
-        <button onClick={() => setCount(count + 1)}>+</button>
+        <button onClick={buttonMin}>+</button>
       </div>
       <div>
         <span>R$</span>
@@ -38,7 +49,9 @@ const Cervejas = ({ nome, imagem, num, ml }) => {
         />
         <span>{ml}ml</span>
       </div>
-      
+      <div>
+        <span>{calculo}</span>
+      </div>
     </div>
   )
 }
